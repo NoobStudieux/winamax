@@ -14,12 +14,13 @@ url_basses = "https://www.winamax.fr/les-challenges-winamax_cash-game_classement
 url_micros = "https://www.winamax.fr/les-challenges-winamax_cash-game_classement-micro-limites"
 
 # init BDD: 
-
-conn = sqlite3.connect("/home/etienne/Bureau/python/scraping/mes_Projets/wina/wina_data.sq3")
-cur = conn.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS " + nom_micros + " (date DATETIME, classement INTEGER, pseudo TEXT, nb_mains INTEGER, nb_caves REAL)")
-cur.execute("CREATE TABLE IF NOT EXISTS " + nom_basses + " (date DATETIME, classement INTEGER, pseudo TEXT, nb_mains INTEGER, nb_caves REAL)")
-
+try:
+    conn = sqlite3.connect("wina_data.sq3")
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS " + nom_micros + " (date DATETIME, classement INTEGER, pseudo TEXT, nb_mains INTEGER, nb_caves REAL)")
+    cur.execute("CREATE TABLE IF NOT EXISTS " + nom_basses + " (date DATETIME, classement INTEGER, pseudo TEXT, nb_mains INTEGER, nb_caves REAL)")
+except Exception as e:
+    print(e)
 try :
     html_micros = urlopen(url_micros)
     html_basses = urlopen(url_basses)

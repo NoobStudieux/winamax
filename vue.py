@@ -6,8 +6,7 @@ import sqlite3
 conn = sqlite3.connect("wina_data.sq3")
 cur = conn.cursor()
 
-tables = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-#cur.close()
+tables = cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name DESC;")
 chaine = "<!DOCTYPE html><html><body><h1>Resultats : </h1>"
 for t in tables:
     print(t)
@@ -16,7 +15,7 @@ for t in tables:
     chaine += "<h4>" + str(t) + "</h4>"
     chaine += "<table>"
     for m in maTable:
-        chaine += "<tr><td>" + str(m[0]) + "</td><td>       <strong>" + str(m[1]) + \
+        chaine += "<tr><td>" + str(t) + "</td><td>       <strong>" + str(m[1]) + \
         "</strong>      </td><td style='color:red'>   " + str(m[2]) + "   </td><td>   " + str(m[3]) + "   </td><td style='color:blue'>     --[+]--     " \
         + str(m[4]) + "</td></tr>"
     chaine += "</table>"
